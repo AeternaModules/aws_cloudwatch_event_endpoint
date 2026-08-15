@@ -28,7 +28,7 @@ output "cloudwatch_event_endpoints_region" {
 }
 output "cloudwatch_event_endpoints_replication_config" {
   description = "Map of replication_config values across all cloudwatch_event_endpoints, keyed the same as var.cloudwatch_event_endpoints"
-  value       = { for k, v in aws_cloudwatch_event_endpoint.cloudwatch_event_endpoints : k => v.replication_config if v.replication_config != null && length(v.replication_config) > 0 }
+  value       = { for k, v in aws_cloudwatch_event_endpoint.cloudwatch_event_endpoints : k => one(v.replication_config) if v.replication_config != null && length(v.replication_config) > 0 }
 }
 output "cloudwatch_event_endpoints_role_arn" {
   description = "Map of role_arn values across all cloudwatch_event_endpoints, keyed the same as var.cloudwatch_event_endpoints"
@@ -36,6 +36,6 @@ output "cloudwatch_event_endpoints_role_arn" {
 }
 output "cloudwatch_event_endpoints_routing_config" {
   description = "Map of routing_config values across all cloudwatch_event_endpoints, keyed the same as var.cloudwatch_event_endpoints"
-  value       = { for k, v in aws_cloudwatch_event_endpoint.cloudwatch_event_endpoints : k => v.routing_config if v.routing_config != null && length(v.routing_config) > 0 }
+  value       = { for k, v in aws_cloudwatch_event_endpoint.cloudwatch_event_endpoints : k => one(v.routing_config) if v.routing_config != null && length(v.routing_config) > 0 }
 }
 
